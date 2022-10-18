@@ -1,57 +1,39 @@
 /* ------------- 背景 ------------- */
-.background {
+#background {
     width: 100%;
     height: 100vh;
     background: url('../img/game-background-01.jpg') no-repeat center center /cover;
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    overflow: hidden;
+}
+
+#player-box{
+    width: 200px;
+    height: 40px;
+    position: relative;
+    left: 20px;
+    top: 450px;
+}
+#player{
+    width: 100%;
+}
+
+.laser{
+    width: 40px;
+    height: 40px;
     position: relative;
 }
 
-/* ------------- 標題 ------------- */
-.title {
-    width: 50%;
-    margin-bottom: 50px;
-}
-
-/* ------------- 玩家 ------------- */
-.players {
-    position: relative;
-}
-.one,.two {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin: auto;
-}
-
-.title img,.player img {
-    width: 100%;
-}
-
-/* ------------- 選擇玩家箭頭 ------------- */
-.arrow {
+.monster{
+    width: 120px;
+    height: 120px;
     position: absolute;
-    top: 30px;
-    left: 100px;
-    width: 6%;
-}
-.arrow img {
-    width: 100%;
-    height: 10%;
-    object-fit: cover;
 }
 
-/* ------------- 火箭 ------------- */
-.rocket{
-    width: 15%;
+.dead-monster{
+    width: 120px;
+    height: 120px;
     position: absolute;
-    left: 0;
-    display: none;
-}
-.rocket img{
-    width: 100%;
+    opacity: 0;
 }
