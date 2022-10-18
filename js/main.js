@@ -47,6 +47,8 @@ function createLaserElement(){
 }
 
 // 子彈射出的移動及時間
+const scoreCounter = document.querySelector('#score span')
+
 function moveLaser(laser){
     let laserInterval = setInterval(() => {
         let xPosition = parseInt(laser.style.left)
@@ -56,6 +58,7 @@ function moveLaser(laser){
                 monster.classList.remove('monster')
                 monster.classList.add('dead-monster')
                 laser.remove()
+                scoreCounter.innerText = parseInt(scoreCounter.innerText) + 10
             }
         })
         if(xPosition === 1600){
@@ -119,7 +122,7 @@ function moveMonster(monster){
             }
         })
         if(xPosition <= 0){
-            monster.remove()
+            gameOver()
         }
         else{
             monster.style.left = `${xPosition - 4}px`
