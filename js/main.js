@@ -106,7 +106,7 @@ function createMonster(){
 }
 
 // 重複生成怪物
-window.setInterval(function(){
+let timer = window.setInterval(function(){
     createMonster()
 }, 3000)
 
@@ -119,10 +119,11 @@ function moveMonster(monster){
         monsters.forEach(monster => {
             if(checkShooterCollision(shooter, monster)){
                 gameOver()
+                window.clearTimeout(timer)
             }
         })
         if(xPosition <= 0){
-            gameOver()
+            monster.remove()
         }
         else{
             monster.style.left = `${xPosition - 4}px`
@@ -168,6 +169,17 @@ function gameOver(){
     monsters.forEach(monster => monster.remove())
     let lasers = document.querySelectorAll('.laser')
     lasers.forEach(laser => laser.remove())
-    alert('Game Over!')
-    window.location.reload()
+    gameOverAlert()
+}
+
+function gameOverAlert(){
+    Swal.fire({
+        title: 'Game Over!',
+        text: 'Please trry again.',
+        imageUrl: './img/rip.png',
+        imageWidth: 200,
+        imageHeight: 200,
+    }).then((result) => {
+        window.location.reload();
+    });
 }
