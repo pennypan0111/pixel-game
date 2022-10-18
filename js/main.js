@@ -55,6 +55,7 @@ function moveLaser(laser){
             if(checkLaserCollision(laser, monster)){
                 monster.classList.remove('monster')
                 monster.classList.add('dead-monster')
+                laser.remove()
             }
         })
         if(xPosition === 1600){
@@ -111,6 +112,12 @@ window.setInterval(function(){
 function moveMonster(monster){
     let moveMonsterInterval = setInterval(() => {
         let xPosition = parseInt(window.getComputedStyle(monster).getPropertyValue('left'))
+        let monsters = document.querySelectorAll('.monster')
+        monsters.forEach(monster => {
+            if(checkShooterCollision(shooter, monster)){
+                gameOver()
+            }
+        })
         if(xPosition <= 0){
             monster.remove()
         }
@@ -121,25 +128,43 @@ function moveMonster(monster){
 }
 
 
-// 
+// 子彈、怪物碰撞偵測
 function checkLaserCollision(laser, monster){
-    let laserLeft = parseInt(laser.style.left)
-    let laserTop = parseInt(laser.style.top)
-    let laserBottom = laserTop - 20
-
-    let monsterLeft = parseInt(monster.style.left)
-    let monsterTop = parseInt(monster.style.top)
-    let monsterBottom = monsterTop - 30
-
-    if(laserTop != 1600 && laserLeft + 40 >= monsterLeft){
-        if((laserTop <= monsterTop && laserTop >= monsterBottom)){
-            return true
-        }
-        else{
-            return false
-        }
-    }
-    else{
+    if(laser.offsetLeft<monster.offsetLeft+monster.offsetWidth&&
+        laser.offsetLeft+laser.offsetWidth>monster.offsetLeft&&
+        laser.offsetTop<monster.offsetTop+monster.offsetHeight&&
+        laser.offsetHeight+laser.offsetTop>monster.offsetTop
+     ){
+      return true
+     }
+     else{
         return false
-    }
+     }
+}
+
+
+// 玩家、怪物碰撞偵測
+function checkShooterCollision(shooter, monster){
+    if(shooter.offsetLeft<monster.offsetLeft+monster.offsetWidth&&
+        shooter.offsetLeft+shooter.offsetWidth>monster.offsetLeft&&
+        shooter.offsetTop<monster.offsetTop+monster.offsetHeight&&
+        shooter.offsetHeight+shooter.offsetTop>monster.offsetTop
+     ){
+      return true
+     }
+     else{
+        return false
+     }
+}
+
+
+// 遊戲結束
+function gameOver(){
+    window.removeEventListener('keydown', letShipFly)
+    let monsters = document.querySelectorAll('.monster')
+    monsters.forEach(monster => monster.remove())
+    let lasers = document.querySelectorAll('.laser')
+    lasers.forEach(laser => laser.remove())
+    alert('Game Over!')
+    window.location.reload()
 }
