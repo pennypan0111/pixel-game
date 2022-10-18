@@ -179,6 +179,12 @@ function gameOverAlert(){
         imageUrl: './img/rip.png',
         imageWidth: 200,
         imageHeight: 200,
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
     }).then((result) => {
         window.location.reload();
     });
