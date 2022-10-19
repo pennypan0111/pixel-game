@@ -41,8 +41,8 @@ function createLaserElement(){
     let newLaser = document.createElement('img')
     newLaser.src = './img/bullet.png'
     newLaser.classList.add('laser')
-    newLaser.style.left = `${xPosition}px`
-    newLaser.style.top = `${yPosition + 35}px`
+    newLaser.style.left = `${xPosition + 200}px`
+    newLaser.style.top = `${yPosition - 5}px`
     return newLaser
 }
 
@@ -119,7 +119,8 @@ function moveMonster(monster){
         monsters.forEach(monster => {
             if(checkShooterCollision(shooter, monster)){
                 gameOver()
-                window.clearTimeout(timer)
+                window.clearTimeout(timer) //停止生成怪物
+                window.clearTimeout(bgrun) //停止背景循環
             }
         })
         if(xPosition <= 0){
@@ -175,7 +176,7 @@ function gameOver(){
 function gameOverAlert(){
     Swal.fire({
         title: 'Game Over!',
-        text: 'Please trry again.',
+        text: '你已被外星人綁架',
         imageUrl: './img/rip.png',
         imageWidth: 200,
         imageHeight: 200,
@@ -189,3 +190,19 @@ function gameOverAlert(){
         window.location.reload();
     });
 }
+
+
+// 背景無限循環
+let background = document.getElementById('background')
+let space = {
+    x:0
+}
+let running = true;
+
+let bgrun = setInterval(function(){
+    if(running){
+        space.x -=3;
+        background.style.backgroundPositionX = space.x + 'px';
+    }
+},30)
+
