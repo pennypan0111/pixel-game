@@ -68,11 +68,8 @@
     left: 5%;
     z-index: 50;
 }
-#esc img{
-    width: 100%;
-}
 
-
+/* ------------- 音樂開關 ------------- */
 .music i{
     font-size: 3rem;
     color: rgba(255, 255, 255, 0.5);
