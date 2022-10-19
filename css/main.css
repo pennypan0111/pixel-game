@@ -11,8 +11,7 @@
     overflow: hidden;
 }
 
-
-
+/* ------------- 玩家火箭 ------------- */
 #player-box{
     width: 200px;
     height: 40px;
@@ -24,12 +23,14 @@
     width: 100%;
 }
 
+/* ------------- 子彈 ------------- */
 .laser{
     width: 40px;
     height: 40px;
     position: relative;
 }
 
+/* ------------- 怪物 ------------- */
 .monster{
     width: 120px;
     height: 120px;
@@ -43,6 +44,7 @@
     opacity: 0;
 }
 
+/* ------------- 分數 ------------- */
 #score{
     font-size: 2.8rem;
     font-family: pixelFont, Arial, Helvetica, sans-serif;
@@ -54,4 +56,31 @@
 
 #score span{
     color: yellow;
+}
+
+/* ------------- 離開 ------------- */
+#esc{
+    font-size: 2.8rem;
+    font-family: pixelFont, Arial, Helvetica, sans-serif;
+    color: yellow;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    z-index: 50;
+}
+#esc img{
+    width: 100%;
+}
+
+
+.music i{
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    cursor: pointer;
+}
+.music .fa-volume-high{
+    display: none;
 }

@@ -1,6 +1,8 @@
 // 定義玩家火箭
 const shooter = document.getElementById('player-box')
 
+
+
 // 往上的函式
 function moveUp(){
     let topPosition = window.getComputedStyle(shooter).getPropertyValue('top')
@@ -13,6 +15,8 @@ function moveUp(){
         shooter.style.top = `${position}px`
     }
 }
+
+
 
 // 往下的函式
 function moveDown(){
@@ -27,12 +31,18 @@ function moveDown(){
     }
 }
 
+
+
 // 發射飛彈
 function fireLaser(){
     let laser = createLaserElement()
     background.appendChild(laser)
+    let shoot = new Audio('./music/shoot.mp3')
+    shoot.play()
     moveLaser(laser)
 }
+
+
 
 // 設定子彈樣式及位置
 function createLaserElement(){
@@ -45,6 +55,8 @@ function createLaserElement(){
     newLaser.style.top = `${yPosition - 5}px`
     return newLaser
 }
+
+
 
 // 子彈射出的移動及時間
 const scoreCounter = document.querySelector('#score span')
@@ -70,6 +82,7 @@ function moveLaser(laser){
         }
     }, 10)
 }
+
 
 
 // 火箭移動及發射的函式
@@ -105,10 +118,13 @@ function createMonster(){
     moveMonster(newMonster)
 }
 
+
+
 // 重複生成怪物
 let timer = window.setInterval(function(){
     createMonster()
 }, 3000)
+
 
 
 // 怪物的移動及時間
@@ -133,6 +149,7 @@ function moveMonster(monster){
 }
 
 
+
 // 子彈、怪物碰撞偵測
 function checkLaserCollision(laser, monster){
     if(laser.offsetLeft<monster.offsetLeft+monster.offsetWidth&&
@@ -146,6 +163,7 @@ function checkLaserCollision(laser, monster){
         return false
      }
 }
+
 
 
 // 玩家、怪物碰撞偵測
@@ -163,6 +181,7 @@ function checkShooterCollision(shooter, monster){
 }
 
 
+
 // 遊戲結束
 function gameOver(){
     window.removeEventListener('keydown', letShipFly)
@@ -170,10 +189,18 @@ function gameOver(){
     monsters.forEach(monster => monster.remove())
     let lasers = document.querySelectorAll('.laser')
     lasers.forEach(laser => laser.remove())
-    gameOverAlert()
+    gameOverAlert() //遊戲結束提示框
+    musicStart.pause() //背景音樂關閉
+
 }
 
+
+
+// 遊戲結束提示框
+let gameOverMusic = new Audio('./music/game-over.mp3')
+
 function gameOverAlert(){
+    gameOverMusic.play()
     Swal.fire({
         title: 'Game Over!',
         text: '你已被外星人綁架',
@@ -188,8 +215,20 @@ function gameOverAlert(){
           }
     }).then((result) => {
         window.location.reload();
+        gameOverMusic.pause();
     });
 }
+
+
+
+// 離開遊戲
+function esc(e){
+    if(e.keyCode == 27){
+        window.location.href = "pixelGame-start.html";
+    }
+}
+window.addEventListener('keydown',esc)
+
 
 
 // 背景無限循環
@@ -206,3 +245,20 @@ let bgrun = setInterval(function(){
     }
 },30)
 
+
+
+// 背景音樂開關設定
+let musicStart = new Audio('./music/bg-music.mp3')
+
+$('.music .fa-volume-xmark').click(function(s) {
+    
+    $('.fa-volume-xmark').css('display', 'none');
+    $('.fa-volume-high').css('display', 'block');
+    musicStart.play();
+})
+
+$('.music .fa-volume-high').click(function(s) {
+    $('.fa-volume-high').css('display', 'none');
+    $('.fa-volume-xmark').css('display', 'block');
+    musicStart.pause();
+})

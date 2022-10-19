@@ -12,7 +12,6 @@ $(document).keydown(function (e) {
     }
     else if(e.keyCode == 13){
         $('.title , .players').css('display','none')
-        $('.rock').css('display','block')
         window.location.href = "pixelGame.html";
     }
 });
