@@ -12,7 +12,7 @@ $(document).keydown(function (e) {
     }
     else if(e.keyCode == 13){
         $('.title , .players').css('display','none')
-        window.location.href = "pixelGame.html";
+        window.location.href = "pixelGame-easy.html";
     }
 });
 
