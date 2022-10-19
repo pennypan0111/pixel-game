@@ -229,7 +229,7 @@ function gameOverAlert(){
 // 離開遊戲回到上一頁
 function esc(e){
     if(e.keyCode == 27){
-        window.location.href = "pixelGame-start.html";
+        window.location.href = "index.html";
     }
 }
 window.addEventListener('keydown',esc)
