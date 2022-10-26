@@ -11,7 +11,7 @@ function moveUp(){
     }
     else{
         let position = parseInt(topPosition)
-        position -= 4
+        position -= 10
         shooter.style.top = `${position}px`
     }
 }
@@ -26,7 +26,7 @@ function moveDown(){
     }
     else{
         let position =parseInt(topPosition)
-        position += 4
+        position += 10
         shooter.style.top = `${position}px`
     }
 }
